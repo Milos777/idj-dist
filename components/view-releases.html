@@ -1,0 +1,87 @@
+<div class="view-releases animated fadeIn">
+    <div class="content_header">
+        <span class="text">
+            Hello <span class="text_name">Bojan</span>,
+            Welcome to View Releases <br>
+            Today is <span id="day"></span>, <span id="date"></span>
+        </span>
+        <span class="text align-right">
+            View your catalog and add music here!<br>
+            To find out how consult our <a class="faq" href="#">FAQ.</a>
+        </span>
+    </div>
+    <div class="view-releases-body">
+        <div class="view-releases-filter">
+            <div class="input-block showMobile">
+                <input placeholder="Search for anything..." type="text"/>
+            </div>
+            <span class="noMobile" data-url="releases" class="link" id="release">
+                Create New Release
+            </span>
+            <span>Sort releases by:
+                <span data-sort="date" class="sort">Date</span>,
+                <span class="active-sort" data-sort="name" class="sort">Title</span>,
+                <span data-sort="artist" class="sort">Artist</span>
+            </span>
+        </div>
+        <div id="releases-list" class="view-releases-list">
+            <div class="release-block">
+                <div class="release-block-image">
+                    <img src="https://via.placeholder.com/190"/>
+                </div>
+                <span class="release-name">Padam</span>
+                <span class="release-artist">Dj Shone x Vlada M.</span>
+                <span class="release-date">Released on : 2/10/2019</span>
+            </div>
+            <div class="release-block">
+                <div class="release-block-image">
+                    <img src="https://via.placeholder.com/190"/>
+                </div>
+                <span class="release-name">Padam</span>
+                <span class="release-artist">Dj Shone x Vlada M.</span>
+                <span class="release-date">Released on : 2/10/2019</span>
+            </div>
+            <div class="release-block">
+                <div class="release-block-image">
+                    <img src="https://via.placeholder.com/190"/>
+                </div>
+                <span class="release-name">Padam</span>
+                <span class="release-artist">Dj Shone x Vlada M.</span>
+                <span class="release-date">Released on : 2/10/2019</span>
+            </div>
+            <div class="release-block">
+                <div class="release-block-image">
+                    <img src="https://via.placeholder.com/190"/>
+                </div>
+                <span class="release-name">Padam</span>
+                <span class="release-artist">Dj Shone x Vlada M.</span>
+                <span class="release-date">Released on : 2/10/2019</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function($){
+        //Get Date
+        let getDate = function() {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            today = dd + '/' + mm + '/' + yyyy;
+            $('#day').text(weekday[new Date().getDay()]);
+            $('#date').text(today);
+        };
+        getDate();
+    })(jQuery);
+</script>

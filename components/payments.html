@@ -1,0 +1,194 @@
+<div class="payments animated fadeIn">
+    <div class="content_header">
+        <span class="text">
+            Hello <span class="text_name">Bojan</span>,
+            Welcome to Payments <br>
+            Today is <span id="day"></span>, <span id="date"></span>
+        </span>
+        <span class="text align-right">
+            Here you can see status & request your monthly statements!<br>
+            Click the statement number to download .PDF
+        </span>
+    </div>
+    <div class="payments-body">
+        <div class="stats">
+            <div class="stats-left">
+                <div class="stats-block">
+                    <span class="stats-number">2.24k</span>
+                    <span class="stats-info">Lifetime $</span>
+                </div>
+                <div class="stats-block">
+                    <span class="stats-number">1.06k</span>
+                    <span class="stats-info">Lifetime $</span>
+                </div>
+                <div class="stats-block">
+                    <span class="stats-number">$ 523</span>
+                    <span class="stats-info">Outstanding $</span>
+                </div>
+                <div class="stats-block">
+                    <span class="stats-number">2/8/19</span>
+                    <span class="stats-info">Last Payment</span>
+                </div>
+            </div>
+            <div class="stats-right">
+                <span class="stats-button cool-hover">Request Payment</span>
+                <span class="stats-button cool-hover">Export CSV</span>
+            </div>
+        </div>
+        <table id="table" class="display payments-table" style="width:100%">
+            <thead>
+            <tr>
+                <th>Statement</th>
+                <th>Generated</th>
+                <th>Paid</th>
+                <th>Gross</th>
+                <th>Net</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>IDJSR-2015-07786</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td>Paid</td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07767</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td>Paid</td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07780</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td>Paid</td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07787</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td>Requested</td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07739</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td>Requested</td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07745</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07766</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07737</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07737</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07737</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07737</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07737</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+            <tr>
+                <td>IDJSR-2015-07737</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>$ 211.76</td>
+                <td><a href="#">Request</a></td>
+            </tr>
+
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<script>
+    (function($){
+        //Get Date
+        let getDate = function() {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            today = dd + '/' + mm + '/' + yyyy;
+            $('#day').text(weekday[new Date().getDay()]);
+            $('#date').text(today);
+        };
+        let table = function(){
+            $('#table').DataTable({
+                "searching": false,
+                "bLengthChange": false,
+                "columnDefs": [
+                    { "width": "16.66%", "targets": 0 }
+                ]
+            });
+        };
+        getDate();
+        table();
+    })(jQuery);
+</script>

@@ -1,0 +1,593 @@
+<div class="label home analytics animated fadeIn">
+    <div class="content_header">
+        <span class="text">
+            Hello <span class="text_name">Bojan</span>,
+            Welcome to your Analytics !<br>
+            Today is <span id="day"></span>, <span id="date"></span>
+        </span>
+        <span class="text align-right">
+            Select start and stop date to see your data:<br>
+            Start Date
+            <input type="date"/>
+            - End Date
+            <input type="date"/>
+        </span>
+    </div>
+    <div class="home__body">
+        <div class="home__body-left">
+            <div class="payments full-row">
+                <div class="stats-left">
+                    <div class="stats-block">
+                        <span class="stats-number">238.57k</span>
+                        <span class="stats-info">Gross Revenue</span>
+                    </div>
+                    <div class="stats-block">
+                        <span class="stats-number">1.01k</span>
+                        <span class="stats-info">Mechanical Fee</span>
+                    </div>
+                    <div class="stats-block">
+                        <span class="stats-number">31M</span>
+                        <span class="stats-info">Quantity</span>
+                    </div>
+                    <div class="stats-block">
+                        <canvas id="mySmallPieChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="home__body-graph">
+                <h2>Gross Revenue by Artist</h2>
+                <canvas id="myChart" height="200"></canvas>
+            </div>
+            <div class="home_dsp">
+                <div class="home_dsp-header">
+                    <span>DSP</span>
+                    <span>Gross Revenue</span>
+                </div>
+                <ul class="home_dsp-body">
+                    <li>
+                        <span>Apple Music</span>
+                        <span>$60,870.25</span>
+                    </li>
+                    <li>
+                        <span>iTunes</span>
+                        <span>$21,173.31</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="home_pie">
+                <h2>Gross Revenue by Country</h2>
+                <canvas id="myPieChart" height="210"></canvas>
+            </div>
+            <div class="world">
+                <h2>Global Overview</h2>
+                <div id="vmap" style="width: 100%; height: 210px;"></div>
+            </div>
+        </div>
+        <div class="home__body-right">
+            <div style="width:100%;    box-sizing: border-box;" class="home_dsp">
+                <div class="home_dsp-header">
+                    <span>Label</span>
+                    <span>USD Payable</span>
+                </div>
+                <ul style="padding-left: 0;" class="home_dsp-body">
+                    <li>
+                        <span>Apple Music</span>
+                        <span>$60,870.25</span>
+                    </li>
+                    <li>
+                        <span>iTunes</span>
+                        <span>$21,173.31</span>
+                    </li>
+                    <li>
+                        <span>Apple Music</span>
+                        <span>$60,870.25</span>
+                    </li>
+                    <li>
+                        <span>iTunes</span>
+                        <span>$21,173.31</span>
+                    </li>
+                    <li>
+                        <span>Apple Music</span>
+                        <span>$60,870.25</span>
+                    </li>
+                    <li>
+                        <span>iTunes</span>
+                        <span>$21,173.31</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .analytics .home__body{
+            flex-direction: row-reverse;
+    }
+    .analytics .stats-left{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .analytics .full-row{
+        width: 100%;
+    }
+    .analytics .stats-number{
+        font-size: 28px;
+    }
+    .analytics input[type="date"]{
+        color: white;
+        font-size: 18px;
+        font-family: 'AvenirBook',sans-serif;
+        padding: 15px;
+        background-color: rgba(0, 0, 0, 0.5);
+        outline: none;
+        border-radius: 30px;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        transition: .3s all ease-in-out;
+        width: 200px;
+        margin: 15px;
+    }
+    .analytics input[type="date"]:last-child{
+        margin-right: 0;
+    }
+    @media screen and (min-width: 320px) and (max-width: 1024px){
+        .analytics .stats-left{
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        .analytics .stats-left > div{
+            width: calc(100% / 2 - 7.5px);
+            margin-bottom: 15px;
+        }
+        .analytics .stats-left{
+            margin-bottom: 0;
+        }
+        .analytics .payments{
+            min-height: auto;
+        }
+        .analytics input[type="date"]{
+            display: block;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-left: 0;
+        }
+    }
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        let data = {
+            "er": 29.1,
+            "et": 17.9,
+            "ke": 17.9,
+            "mg": 13.7,
+            "mu": 1112.2,
+            "sc": 2433.1,
+            "ca": 100000
+        };
+        let hexes = [
+            '#eff3ff',
+            '#bdd7e7',
+            '#6baed6',
+            '#3182bd',
+            '#08519c',
+            '#eff3ff',
+        ];
+        let dataValues = [];
+        for (let country in data) {
+            let countryValue = data[country];
+            if (countryValue > 0) {
+                dataValues.push(countryValue);
+            };
+        };
+        let geoSeries = new geostats(dataValues);
+        let jenks = geoSeries.getClassJenks(5);
+        let colors = {};
+        for (let country in data) {
+            if (data[country] > 0) {
+                for (let i = 0; i <= 4; i++)  {
+                    if (data[country] >= (jenks[i]) && data[country] <= (jenks[i + 1])) {
+                        colors[country] = hexes[i]
+                    }
+                }
+            }  else { colors[country] = '#A8A8A8' };
+        };
+        jQuery('#vmap').vectorMap({
+            colors: colors,
+            map: 'world_en',
+            backgroundColor : 'rgba(0, 0, 0, 0.5);',
+            hoverOpacity: 0.7,
+            hoverColor: false
+        });
+    });
+</script>
+<script>
+    (function($){
+        //SmallPie
+        let ctxSmallPie = document.getElementById("mySmallPieChart").getContext('2d');
+        let mySmallPieChart = new Chart(ctxSmallPie, {
+            type: 'pie',
+            data: {
+                labels: ["Streaming", "Download"],
+                datasets: [{
+                    label: "Status",
+                    data: [60, 40],
+                    backgroundColor: ["#352ca7", "#8d82ff"],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                segmentShowStroke: false,
+                title: {
+                    display: false,
+                    fontsize: 14,
+                },
+                legend: {
+                    display: false,
+                    position: 'bottom',
+                    labels: {
+                        fontColor: 'white',
+                        fontFamily: 'AvenirBook',
+                        generateLabels: function(chart) {
+                            let data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    let meta = chart.getDatasetMeta(0);
+                                    let ds = data.datasets[0];
+                                    let arc = meta.data[i];
+                                    let custom = arc && arc.custom || {};
+                                    let getValueAtIndexOrDefault = Chart.helpers.getValueAtIndexOrDefault;
+                                    let arcOpts = chart.options.elements.arc;
+                                    let fill = custom.backgroundColor ? custom.backgroundColor : getValueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
+                                    let stroke = custom.borderColor ? custom.borderColor : getValueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+                                    let bw = custom.borderWidth ? custom.borderWidth : getValueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+
+                                    // We get the value of the current label
+                                    let value = chart.config.data.datasets[arc._datasetIndex].data[arc._index];
+
+                                    return {
+                                        // Instead of `text: label,`
+                                        // We add the value to the string
+                                        text: value + '% ' + label,
+                                        fillStyle: fill,
+                                        strokeStyle: stroke,
+                                        lineWidth: bw,
+                                        hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+                                        index: i
+                                    };
+                                });
+                            } else {
+                                return [];
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        //Pie
+        let ctxPie = document.getElementById("myPieChart").getContext('2d');
+        let myPieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: ["Germany", "United States", "Sweden", "Austria"],
+                datasets: [{
+                    label: "Status",
+                    data: [72, 14, 16, 3],
+                    backgroundColor: ["#6e2aa6", "#ae43ff", "#cd86ff", '#cd86ff'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                segmentShowStroke: false,
+                title: {
+                    display: false,
+                    fontsize: 14,
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: 'white',
+                        fontFamily: 'AvenirBook',
+                        generateLabels: function(chart) {
+                            let data = chart.data;
+                            if (data.labels.length && data.datasets.length) {
+                                return data.labels.map(function(label, i) {
+                                    let meta = chart.getDatasetMeta(0);
+                                    let ds = data.datasets[0];
+                                    let arc = meta.data[i];
+                                    let custom = arc && arc.custom || {};
+                                    let getValueAtIndexOrDefault = Chart.helpers.getValueAtIndexOrDefault;
+                                    let arcOpts = chart.options.elements.arc;
+                                    let fill = custom.backgroundColor ? custom.backgroundColor : getValueAtIndexOrDefault(ds.backgroundColor, i, arcOpts.backgroundColor);
+                                    let stroke = custom.borderColor ? custom.borderColor : getValueAtIndexOrDefault(ds.borderColor, i, arcOpts.borderColor);
+                                    let bw = custom.borderWidth ? custom.borderWidth : getValueAtIndexOrDefault(ds.borderWidth, i, arcOpts.borderWidth);
+
+                                    // We get the value of the current label
+                                    let value = chart.config.data.datasets[arc._datasetIndex].data[arc._index];
+
+                                    return {
+                                        // Instead of `text: label,`
+                                        // We add the value to the string
+                                        text: value + '% ' + label,
+                                        fillStyle: fill,
+                                        strokeStyle: stroke,
+                                        lineWidth: bw,
+                                        hidden: isNaN(ds.data[i]) || meta.data[i].hidden,
+                                        index: i
+                                    };
+                                });
+                            } else {
+                                return [];
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        //Graph
+        let data = {
+            // Autori
+            labels: ["MC Stojan", "Rasta", "Lepa Brena", "Cvija", "Relja", "MC Yankoo", "Mile Kitic", "Coby", "Cvija"],
+            datasets: [{
+                label: "First",
+                backgroundColor: 'rgba(153, 220, 255, 0.1)',
+                borderWidth: 1,
+                // Bar sa tamnijom bojom
+                data: [40000, 35000, 15000, 12000, 10000, 8000, 6000, 4000, 2000],
+                xAxisID: "bar-x-axis1",
+            }, {
+                label: "Second",
+                backgroundColor: 'rgba(21, 74, 113)',
+                borderWidth: 1,
+                //Bar sa svetlijom bojom
+                data: [0, 0, 5000, 1000, 0, 4000, 5, 30, 35, 5, 30, 35],
+                xAxisID: "bar-x-axis2",
+            }]
+        };
+
+        let options = {
+            tooltips: {
+                enabled: false
+            },
+            legend: {
+                display: false
+            },
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                    id: "bar-x-axis1",
+                    barThickness: 20,
+                    ticks:{
+                        maxRotation: 90,
+                        minRotation: 90,
+                        fontColor: 'white'
+                    }
+                }, {
+                    display: false,
+                    stacked: true,
+                    id: "bar-x-axis2",
+                    barThickness: 20,
+                    type: 'category',
+                    categoryPercentage: 0.8,
+                    barPercentage: 0.9,
+                    gridLines: {
+                        offsetGridLines: true
+                    },
+                    offset: true
+                }],
+                yAxes: [{
+                    stacked: false,
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function(label, index, labels) {
+                            return label/1000+'k';
+                        },
+                        fontColor: 'white'
+                    },
+                }]
+
+            }
+        };
+
+        let ctx = document.getElementById("myChart").getContext("2d");
+        let myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+        //Get Date
+        let getDate = function() {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            today = dd + '/' + mm + '/' + yyyy;
+            $('#day').text(weekday[new Date().getDay()]);
+            $('#date').text(today);
+        };
+        //Upload File and Preview
+        let uploadImageAndPreview = function(){
+            function initImageUpload(box) {
+                let uploadField = box.querySelector('.image-upload');
+
+                uploadField.addEventListener('change', getFile);
+
+                function getFile(e){
+                    let file = e.currentTarget.files[0];
+                    checkType(file);
+                }
+
+                function previewImage(file){
+                    let thumb = box.querySelector('.js--image-preview'),
+                        reader = new FileReader();
+
+                    reader.onload = function() {
+                        thumb.style.backgroundImage = 'url(' + reader.result + ')';
+                    }
+                    reader.readAsDataURL(file);
+                    thumb.className += ' js--no-default';
+                }
+
+                function checkType(file){
+                    let imageType = /image.*/;
+                    if (!file.type.match(imageType)) {
+                        throw 'Datei ist kein Bild';
+                    } else if (!file){
+                        throw 'Kein Bild gewählt';
+                    } else {
+                        previewImage(file);
+                    }
+                }
+
+            }
+
+            // initialize box-scope
+            let boxes = document.querySelectorAll('.box');
+
+            for (let i = 0; i < boxes.length; i++) {
+                let box = boxes[i];
+                initDropEffect(box);
+                initImageUpload(box);
+            }
+
+
+
+            /// drop-effect
+            function initDropEffect(box){
+                let area, drop, areaWidth, areaHeight, maxDistance, dropWidth, dropHeight, x, y;
+
+                // get clickable area for drop effect
+                area = box.querySelector('.js--image-preview');
+                area.addEventListener('click', fireRipple);
+
+                function fireRipple(e){
+                    area = e.currentTarget
+                    // create drop
+                    if(!drop){
+                        drop = document.createElement('span');
+                        drop.className = 'drop';
+                        this.appendChild(drop);
+                    }
+                    // reset animate class
+                    drop.className = 'drop';
+
+                    // calculate dimensions of area (longest side)
+                    areaWidth = getComputedStyle(this, null).getPropertyValue("width");
+                    areaHeight = getComputedStyle(this, null).getPropertyValue("height");
+                    maxDistance = Math.max(parseInt(areaWidth, 10), parseInt(areaHeight, 10));
+
+                    // set drop dimensions to fill area
+                    drop.style.width = maxDistance + 'px';
+                    drop.style.height = maxDistance + 'px';
+
+                    // calculate dimensions of drop
+                    dropWidth = getComputedStyle(this, null).getPropertyValue("width");
+                    dropHeight = getComputedStyle(this, null).getPropertyValue("height");
+
+                    // calculate relative coordinates of click
+                    // logic: click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center
+                    x = e.pageX - this.offsetLeft - (parseInt(dropWidth, 10)/2);
+                    y = e.pageY - this.offsetTop - (parseInt(dropHeight, 10)/2) - 30;
+
+                    // position drop and animate
+                    drop.style.top = y + 'px';
+                    drop.style.left = x + 'px';
+                    drop.className += ' animate';
+                    e.stopPropagation();
+
+                }
+            }
+        };
+
+        let dropdown = function(){
+            let x, i, j, selElmnt, a, b, c;
+            /* Look for any elements with the class "custom-select": */
+            x = document.getElementsByClassName("dropdown");
+            for (i = 0; i < x.length; i++) {
+                selElmnt = x[i].getElementsByTagName("select")[0];
+                /* For each element, create a new DIV that will act as the selected item: */
+                a = document.createElement("DIV");
+                a.setAttribute("class", "select-selected");
+                a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+                x[i].appendChild(a);
+                /* For each element, create a new DIV that will contain the option list: */
+                b = document.createElement("DIV");
+                b.setAttribute("class", "select-items select-hide");
+                for (j = 1; j < selElmnt.length; j++) {
+                    /* For each option in the original select element,
+                    create a new DIV that will act as an option item: */
+                    c = document.createElement("DIV");
+                    c.innerHTML = selElmnt.options[j].innerHTML;
+                    c.addEventListener("click", function(e) {
+                        /* When an item is clicked, update the original select box,
+                        and the selected item: */
+                        let y, i, k, s, h;
+                        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                        h = this.parentNode.previousSibling;
+                        for (i = 0; i < s.length; i++) {
+                            if (s.options[i].innerHTML == this.innerHTML) {
+                                s.selectedIndex = i;
+                                h.innerHTML = this.innerHTML;
+                                y = this.parentNode.getElementsByClassName("same-as-selected");
+                                for (k = 0; k < y.length; k++) {
+                                    y[k].removeAttribute("class");
+                                }
+                                this.setAttribute("class", "same-as-selected");
+                                break;
+                            }
+                        }
+                        h.click();
+                    });
+                    b.appendChild(c);
+                }
+                x[i].appendChild(b);
+                a.addEventListener("click", function(e) {
+                    /* When the select box is clicked, close any other select boxes,
+                    and open/close the current select box: */
+                    e.stopPropagation();
+                    closeAllSelect(this);
+                    this.nextSibling.classList.toggle("select-hide");
+                    this.classList.toggle("select-arrow-active");
+                });
+            }
+
+            function closeAllSelect(elmnt) {
+                /* A function that will close all select boxes in the document,
+                except the current select box: */
+                let x, y, i, arrNo = [];
+                x = document.getElementsByClassName("select-items");
+                y = document.getElementsByClassName("select-selected");
+                for (i = 0; i < y.length; i++) {
+                    if (elmnt == y[i]) {
+                        arrNo.push(i)
+                    } else {
+                        y[i].classList.remove("select-arrow-active");
+                    }
+                }
+                for (i = 0; i < x.length; i++) {
+                    if (arrNo.indexOf(i)) {
+                        x[i].classList.add("select-hide");
+                    }
+                }
+            }
+
+            /* If the user clicks anywhere outside the select box,
+            then close all select boxes: */
+            document.addEventListener("click", closeAllSelect);
+        };
+        getDate();
+        dropdown();
+        uploadImageAndPreview();
+    })(jQuery);
+</script>

@@ -1,0 +1,123 @@
+<div class="payments animated fadeIn">
+    <div class="content_header">
+        <span class="text">
+            Hello <span class="text_name">Bojan</span>,
+            Welcome to Artist Approval <br>
+            Today is <span id="day"></span>, <span id="date"></span>
+        </span>
+        <span class="text align-right">
+            some text
+        </span>
+    </div>
+    <div class="payments-body">
+        <table id="table" class="display payments-table" style="width:100%;font-size:12px">
+            <thead>
+            <tr>
+                <th>Img</th>
+                <th>Artist Name</th>
+                <th>Artist Website</th>
+                <th>Facebook</th>
+                <th>Twitter</th>
+                <th>Google+</th>
+                <th>Instagram</th>
+                <th>SoundCloud</th>
+                <th>Youtube</th>
+                <th>Approve</th>
+                <th>Reject</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>IDJSR-2015-07786</td>
+                <td><a>link</a></td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>IDJSR-2015-07786</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>IDJSR-2015-07786</td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<style>
+    @media
+    only screen and (max-width: 767px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr { padding: 25px 0; }
+        td {
+            border: none;
+            position: relative;
+            padding-left: 200px;
+            margin-left: 90px;
+        }
+        td:before {
+            position: absolute;
+            top: 12px;
+            left: 8px;
+            width: 200px;
+            padding-right: 40px;
+            white-space: nowrap;
+            margin-left: -150px;
+        }
+        td:nth-of-type(1):before { content: "Img"; }
+        td:nth-of-type(2):before { content: "Artist Name"; }
+        td:nth-of-type(3):before { content: "Artist Website"; }
+        td:nth-of-type(4):before { content: "Facebook";}
+        td:nth-of-type(5):before { content: "Twitter";}
+        td:nth-of-type(6):before { content: "Google+";}
+        td:nth-of-type(7):before { content: "Instagram";}
+        td:nth-of-type(8):before { content: "SoundCloud";}
+        td:nth-of-type(9):before { content: "Youtube";}
+        td:nth-of-type(10):before { content: "Approve";}
+        td:nth-of-type(11):before { content: "Reject";}
+    }
+</style>
+<script>
+    (function($){
+        //Get Date
+        let getDate = function() {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            today = dd + '/' + mm + '/' + yyyy;
+            $('#day').text(weekday[new Date().getDay()]);
+            $('#date').text(today);
+        };
+        let table = function(){
+            $('#table').DataTable({
+                "searching": false,
+                "bLengthChange": false,
+                "columnDefs": [
+                    { "width": "16.66%", "targets": 0 }
+                ]
+            });
+        };
+        getDate();
+        table();
+    })(jQuery);
+</script>

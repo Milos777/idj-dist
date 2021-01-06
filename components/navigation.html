@@ -1,0 +1,238 @@
+<div class="navigation">
+    <div class="logo"><img src="./src/img/logo.png"/></div>
+    <div class="links">
+        <span data-url="home" class="link active" id="home">
+            <i class="fas fa-home"></i> Home
+        </span>
+        <div class="menu-dropdown">
+            <span class="bold-link"><i class="fas fa-user"></i> Users <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span data-url="user" class="link" id="user">
+                    <i class="fas fa-user"></i> Create New User(s)
+                </span>
+                <span data-url="view-user" class="link" id="view-users">
+                    <i class="fas fa-user"></i> View & Edit Users
+                </span>
+            </div>
+        </div>
+        <div class="menu-dropdown">
+            <span class="bold-link"><i class="fas fa-tag"></i> Label <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span data-url="label" class="link" id="label">
+                    <i class="fas fa-tag"></i> Create Label
+                </span>
+                <span data-url="view-label" class="link" id="view-label">
+                    <i class="fas fa-tag"></i> View & Edit Labels
+                </span>
+            </div>
+        </div>
+        <div class="menu-dropdown">
+            <span class="bold-link"><i class="fas fa-star"></i> Artists <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span data-url="star" class="link" id="star">
+                    <i class="fas fa-star"></i> Create New Artist
+                </span>
+                <span data-url="view-star" class="link" id="view-stars">
+                    <i class="fas fa-star"></i> View & Edit Artists
+                </span>
+            </div>
+        </div>
+        <div class="menu-dropdown">
+            <span class="bold-link"><i class="fas fa-wrench"></i> Release Tools <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span data-url="releases" class="link" id="releases">
+                    <i class="fas fa-play-circle"></i> Create New Release
+                </span>
+                        <span data-url="view-releases" class="link" id="view-release">
+                    <i class="fas fa-play-circle"></i> Release List
+                </span>
+            </div>
+        </div>
+        <div class="menu-dropdown">
+            <span class="bold-link"><i class="fas fa-copy"></i> Reports <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span class="link" data-url="reports" id="reports">
+                    <i class="fas fa-chart-bar"></i> DSP Reports
+                </span>
+                <span class="link" data-url="request-report" id="request-report">
+                    <i class="fas fa-chart-bar"></i> Custom Report
+                </span>
+            </div>
+        </div>
+        <div class="menu-dropdown">
+            <span class="bold-link"> <i class="fab fa-youtube"></i> YouTubeTools <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span data-url="view-channels" class="link" id="view-channels">
+                     <i class="fab fa-youtube"></i> My Channels
+                </span>
+                <span data-url="view-videos" class="link" id="view-videos">
+                     <i class="fab fa-youtube"></i> My Videos
+                </span>
+            </div>
+        </div>
+        <div class="menu-dropdown special-dropdown">
+            <span class="bold-link"> <i class="fas fa-users-cog"></i> Administration <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span class="bold-link-sub">
+                     <i class="fas fa-check-double"></i> Catalog Admin <i class="fas fa-chevron-right second-arrow"></i>
+                </span>
+                <div class="menu-list-sub">
+                    <span data-url="artist-approval" class="link" id="artist-approval">
+                        <i class="fas fa-check-double"></i> <span>Artist Approval</span>
+                    </span>
+                    <span data-url="label-approval" class="link" id="label-approval">
+                         <i class="fas fa-check-double"></i> <span>Label Approval</span>
+                    </span>
+                    <span data-url="release-approval" class="link" id="release-approval">
+                         <i class="fas fa-check-double"></i> <span>Release Approval</span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-list">
+                <span class="bold-link-sub">
+                     <i class="fas fa-laptop-code"></i> Code Admin <i class="fas fa-chevron-right second-arrow"></i>
+                </span>
+                <div class="menu-list-sub">
+                    <span data-url="upc-administration" class="link" id="upc-administration">
+                         <i class="fas fa-laptop-code"></i> <span>UPC Administration</span>
+                    </span>
+                    <span data-url="isrc-administration" class="link" id="isrc-administration">
+                         <i class="fas fa-laptop-code"></i> <span>ISRC Administration</span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-list">
+                <span class="bold-link-sub">
+                     <i class="fas fa-store"></i> Store Admin <i class="fas fa-chevron-right second-arrow"></i>
+                </span>
+                <div class="menu-list-sub">
+                    <span data-url="create-store" class="link" id="create-store">
+                         <i class="fas fa-store"></i> <span>Create Store</span>
+                    </span>
+                    <span data-url="view-stores" class="link" id="view-stores">
+                         <i class="fas fa-store"></i> <span>View Stores</span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-list">
+                <span class="bold-link-sub">
+                     <i class="fas fa-truck"></i> Delivery Admin <i class="fas fa-chevron-right second-arrow"></i>
+                </span>
+                <div class="menu-list-sub">
+                    <span data-url="create-delivery-batch" class="link" id="create-delivery-batch">
+                         <i class="fas fa-truck"></i> <span>Create Delivery Batch</span>
+                    </span>
+                    <span data-url="view-delivery-batches" class="link" id="view-delivery-batches">
+                         <i class="fas fa-truck"></i> <span>View Delivery Batches</span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-list">
+                <span class="bold-link-sub">
+                     <i class="fas fa-copy"></i> Reporting Admin <i class="fas fa-chevron-right second-arrow"></i>
+                </span>
+                <div class="menu-list-sub">
+                     <span data-url="report-batch-manager" class="link" id="report-batch-manager">
+                        <i class="fas fa-copy"></i> <span>Report Batch Manager</span>
+                    </span>
+                    <span data-url="connect-report-items" class="link" id="connect-report-items">
+                         <i class="fas fa-copy"></i> <span>Connect Report Items</span>
+                    </span>
+                    <span data-url="assign-releases-to-artist-profiles" class="link" id="assign-releases-to-artist-profiles">
+                        <i class="fas fa-copy"></i> <span>Assign releases to Artist Profiles</span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-list">
+                <span class="bold-link-sub">
+                     <i class="fas fa-network-wired"></i> Relationships & Links <i class="fas fa-chevron-right second-arrow"></i>
+                </span>
+                <div class="menu-list-sub">
+                    <span data-url="create-new-distributor" class="link" id="create-new-distributor">
+                         <i class="fas fa-network-wired"></i> <span>Create New Distributor</span>
+                    </span>
+                    <span data-url="view-distributor" class="link" id="view-distributor">
+                        <i class="fas fa-network-wired"></i> <span>View & Edit Distributor</span>
+                    </span>
+                    <span data-url="manage-user-profiles-relationships" class="link" id="manage-user-profiles-relationships">
+                        <i class="fas fa-network-wired"></i> <span>Manage User Profiles Relationships</span>
+                    </span>
+                    <span data-url="allowed-labels" class="link" id="allowed-labels">
+                        <i class="fas fa-network-wired"></i> <span>Allowed Labels</span>
+                    </span>
+                </div>
+            </div>
+            <div class="menu-list">
+                <span class="bold-link-sub">
+                     <i class="fas fa-file-contract"></i> Contract Manages <i class="fas fa-chevron-right second-arrow"></i>
+                </span>
+                <div class="menu-list-sub">
+                    <span data-url="create-contact" class="link" id="create-contact">
+                        <i class="fas fa-file-contract"></i> <span>Create Contract</span>
+                    </span>
+                    <span data-url="view-contracts" class="link" id="view-contracts">
+                        <i class="fas fa-file-contract"></i> <span>View Contracts</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="menu-dropdown">
+            <span class="bold-link"> <i class="fas fa-dollar-sign"></i> Billing <i class="fas fa-chevron-right first-arrow"></i></span>
+            <div class="menu-list">
+                <span data-url="report-batches-transfer" class="link" id="report-batches-transfer">
+                     <i class="fas fa-dollar-sign"></i> Report Batches Transfer
+                </span>
+                <span data-url="create-invoice" class="link" id="create-invoice">
+                     <i class="fas fa-dollar-sign"></i> Create Invoice
+                </span>
+                <span data-url="invoice-list" class="link" id="invoice-list">
+                     <i class="fas fa-dollar-sign"></i> Invoice List
+                </span>
+            </div>
+        </div>
+        <span data-url="analytics" class="link" id="analytics">
+            <i class="fas fa-chart-bar"></i> Analytics
+        </span>
+        <span class="link" data-url="payments" id="payments">
+            <i class="fas fa-dollar-sign"></i> Payouts
+        </span>
+        <span class="link" id="help">
+            <i class="fas fa-question-circle"></i> Help & Support
+        </span>
+        <i id="close-button" class="fas fa-times close-button"></i>
+    </div>
+</div>
+<div class="mobile-button">
+    <div class="logo"><img src="./src/img/logo.png"/></div>
+    <i id="button" class="fas fa-bars"></i>
+</div>
+<div class="mobile-footer-menu">
+    <span data-url="label" class="link" id="label">
+        <i class="fas fa-tag"></i> Create Label
+    </span>
+    <span data-url="releases" class="link" id="release">
+        <i class="fas fa-play-circle"></i> Create Release
+    </span>
+    <span data-url="analytics" class="link" id="analytics">
+        <i class="fas fa-chart-bar"></i> Analytics
+    </span>
+    <span class="link" data-url="reports" id="reports">
+        <i class="fas fa-chart-bar"></i> Reports
+    </span>
+    <span class="link" data-url="payments" id="payments">
+        <i class="fas fa-dollar-sign"></i> Payments
+    </span>
+</div>
+<script>
+    (function($){
+        $('#button').on('click',function(){
+           $('.navigation').addClass('mobileMenu');
+           $('#content').addClass('blur');
+        });
+        $('#close-button').on('click',function(){
+            $('.navigation').removeClass('mobileMenu');
+            $('#content').removeClass('blur');
+        });
+
+    })(jQuery);
+</script>

@@ -1,0 +1,161 @@
+<div class="payments animated fadeIn">
+    <div class="content_header">
+        <span class="text">
+            Hello <span class="text_name">Bojan</span>,
+            Welcome to UPC Administration <br>
+            Today is <span id="day"></span>, <span id="date"></span>
+        </span>
+        <span class="text align-right">
+            some text
+        </span>
+    </div>
+    <div class="payments-body">
+        <div style="margin-top: 50px;" class="form">
+            <div class="form_left">
+                <h2>Import UPC Codes</h2>
+                <div class="upload-options">
+                    <span>Browse</span>
+                    <input type="file" class="image-upload" accept=".csv" />
+                </div>
+                <span style="margin-top: 10px;display:block">Types supported: .CSV</span>
+            </div>
+            <table id="table" class="display payments-table" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>Total Codes</th>
+                    <th>Import Date</th>
+                    <th>Imported By</th>
+                    <th>Batch Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>IDJSR-2015-07786</td>
+                    <td>5/13/2015</td>
+                    <td>5/13/2015</td>
+                    <td>$ 211.76</td>
+                    <td>$ 211.76</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+            <div class="upc-holder">
+                <h2>Import UPC Codes</h2>
+                <div class="upc-holder-block">
+                    <div class="upc-holder-block-left">
+                        <span><b>Upc Code Statistics</b>:</span>
+                        <span>Unused UPC Codes: 0</span>
+                        <span>Used UPC Codes: 0</span>
+                        <span>Total UPC Codes In System: 0</span>
+                    </div>
+                    <div class="upc-holder-block-right">
+                        <span>System Info</span>
+                        <span><b>Last Update :</b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .upc-holder-block{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+    .upc-holder{
+        width: 100%;
+        margin-top: 25px;
+    }
+    .upc-holder-block-left span{
+        display: block;
+        margin-bottom: 10px;
+    }
+    .upc-holder-block-right span{
+        display: block;
+        margin-bottom: 10px;
+    }
+    .upload-options{
+        position: relative !important;
+        bottom: inherit !important;
+        width: 100% !important;
+    }
+    .form_left{
+        width: 100% !important;
+    }
+    .form{
+        flex-wrap: wrap !important;
+    }
+    .payments .dataTables_wrapper{
+        width: 100% !important;
+    }
+    @media
+    only screen and (max-width: 767px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr { padding: 25px 0; }
+        td {
+            border: none;
+            position: relative;
+            padding-left: 200px;
+            margin-left: 90px;
+        }
+        td:before {
+            position: absolute;
+            top: 12px;
+            left: 8px;
+            width: 200px;
+            padding-right: 40px;
+            white-space: nowrap;
+            margin-left: -150px;
+        }
+        td:nth-of-type(1):before { content: "Filename"; }
+        td:nth-of-type(2):before { content: "Total Codes"; }
+        td:nth-of-type(3):before { content: "Import Date"; }
+        td:nth-of-type(4):before { content: "Imported By";}
+        td:nth-of-type(5):before { content: "Batch Status";}
+    }
+</style>
+<script>
+    (function($){
+        //Get Date
+        let getDate = function() {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            today = dd + '/' + mm + '/' + yyyy;
+            $('#day').text(weekday[new Date().getDay()]);
+            $('#date').text(today);
+        };
+        let table = function(){
+            $('#table').DataTable({
+                "searching": false,
+                "bLengthChange": false,
+                "columnDefs": [
+                    { "width": "16.66%", "targets": 0 }
+                ]
+            });
+        };
+        getDate();
+        table();
+    })(jQuery);
+</script>

@@ -1,0 +1,129 @@
+<div class="payments animated fadeIn">
+    <div class="content_header">
+        <span class="text">
+            Hello <span class="text_name">Bojan</span>,
+            Welcome to DSP List <br>
+            Today is <span id="day"></span>, <span id="date"></span>
+        </span>
+        <span class="text align-right">
+            some text
+        </span>
+    </div>
+    <div class="payments-body">
+        <table id="table" class="display payments-table" style="width:100%">
+            <thead>
+            <tr>
+                <th>Select</th>
+                <th>UPC</th>
+                <th>Artist</th>
+                <th>Release Title</th>
+                <th>Number Of Tracks</th>
+                <th>Label</th>
+                <th>Release Date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <label class="checkmark-box">
+                        <input class="check" type="checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+                <td>5/13/2015</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+                <td>5/13/2015</td>
+                <td>$ 211.76</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        <div class="form_footer">
+            <button class="cool-hover submit-button" type="submit">Continue</button>
+        </div>
+    </div>
+</div>
+<style>
+    #table_wrapper{
+        animation-delay: 0s;
+    }
+    .checkmark{
+        left: 44%;
+        top: -4px;
+    }
+    @media
+    only screen and (max-width: 767px) {
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr { padding: 25px 0; }
+        td {
+            border: none;
+            position: relative;
+            padding-left: 200px;
+            margin-left: 90px;
+        }
+        td:before {
+            position: absolute;
+            top: 12px;
+            left: 8px;
+            width: 200px;
+            padding-right: 40px;
+            white-space: nowrap;
+            margin-left: -150px;
+        }
+        td:nth-of-type(1):before { content: "Select"; }
+        td:nth-of-type(2):before { content: "UPC"; }
+        td:nth-of-type(3):before { content: "Artist"; }
+        td:nth-of-type(4):before { content: "Release Title";}
+        td:nth-of-type(5):before { content: "Number Of Tracks"; }
+        td:nth-of-type(6):before { content: "Label";}
+        td:nth-of-type(7):before { content: "Release Date"; }
+        td:nth-of-type(8):before { content: "Status";}
+    }
+</style>
+<script>
+    (function($){
+        //Get Date
+        let getDate = function() {
+            let today = new Date();
+            let dd = String(today.getDate()).padStart(2, '0');
+            let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            let yyyy = today.getFullYear();
+
+            let weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+
+            today = dd + '/' + mm + '/' + yyyy;
+            $('#day').text(weekday[new Date().getDay()]);
+            $('#date').text(today);
+        };
+        let table = function(){
+            $('#table').DataTable({
+                "searching": false,
+                "bLengthChange": false,
+                "columnDefs": [
+                    { "width": "16.66%", "targets": 0 }
+                ]
+            });
+        };
+        getDate();
+        table();
+    })(jQuery);
+</script>
